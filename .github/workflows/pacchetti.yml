@@ -1,0 +1,49 @@
+# Costruisce il programma per il PC di FIONDA su Windows, Mac e Linux (macchine vere di GitHub)
+# e lascia gli installer da scaricare nella pagina dell'esecuzione. Non pubblica niente da solo.
+name: pacchetti
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+
+jobs:
+  pacchetto:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            cmd: pacchetto:win
+          - os: macos-latest
+            cmd: pacchetto:mac
+          - os: ubuntu-latest
+            cmd: pacchetto:linux
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: pc
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: pc/package-lock.json
+      - run: npm ci
+      - run: npx tsc -p . --noEmit
+      # i test su PC e iPhone condividono le icone: serve anche la cartella iphone/ui (c'è nel checkout)
+      - run: npm test
+      - run: npm run ${{ matrix.cmd }}
+        env:
+          # niente firma: i pacchetti sono "da provare" (su Mac: clic destro → Apri la prima volta)
+          CSC_IDENTITY_AUTO_DISCOVERY: false
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fionda-${{ matrix.os }}
+          path: |
+            pc/dist/*.exe
+            pc/dist/*.dmg
+            pc/dist/*.AppImage
+            pc/dist/*.deb
+          if-no-files-found: error

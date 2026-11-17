@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'">
+  <title>FIONDA</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: transparent; overflow: hidden; user-select: none; }
+    canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; }
+    #etichetta {
+      position: fixed; padding: 9px 16px; border-radius: 999px; white-space: nowrap; pointer-events: none;
+      font: 600 14px "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; letter-spacing: .1px;
+      color: #fff; background: rgba(18, 12, 40, .78); border: 1px solid rgba(187, 168, 255, .35);
+      box-shadow: 0 6px 30px rgba(123, 92, 255, .35);
+      opacity: 0; transform: translateY(6px) scale(.97); transition: opacity .35s ease, transform .35s ease;
+    }
+    #etichetta.vista { opacity: 1; transform: none; }
+    #etichetta, #attesa { display: flex; align-items: center; gap: 8px; }
+    #etichetta svg { color: #5ce1ff; flex: none; }
+    .cartolina {
+      position: fixed; left: 0; top: 0; width: 220px; padding: 10px 10px 12px; border-radius: 20px; pointer-events: none;
+      background: rgba(18, 12, 40, .86); border: 1px solid rgba(187, 168, 255, .4); color: #fff;
+      box-shadow: 0 0 0 1px rgba(123, 92, 255, .25), 0 20px 60px -10px rgba(123, 92, 255, .7), 0 0 80px rgba(92, 225, 255, .25);
+      font: 600 13.5px "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; will-change: transform, opacity;
+    }
+    .cartolina .figura.icona { background: radial-gradient(circle at 50% 35%, #4a36b0, #151036 70%); }
+    .cartolina .figura svg { filter: drop-shadow(0 0 14px rgba(92, 225, 255, .55)); }
+    .cartolina .figura { height: 140px; border-radius: 13px; overflow: hidden; display: grid; place-items: center; font-size: 54px;
+      background: radial-gradient(circle at 50% 40%, #3a2a8a, #140f30); }
+    .cartolina img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .cartolina .nome { margin-top: 9px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cartolina .da { font-weight: 400; font-size: 12px; color: #bba8ff; margin-top: 2px; }
+    #attesa {
+      position: fixed; padding: 6px 12px; border-radius: 999px; white-space: nowrap; pointer-events: none;
+      font: 600 12.5px "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; color: #e9e3ff;
+      background: rgba(18, 12, 40, .7); border: 1px solid rgba(187, 168, 255, .3); opacity: 0; transition: opacity .4s;
+    }
+    #attesa.vista { opacity: .92; }
+    #etichetta.chiaro { color: #1b1240; background: rgba(255, 255, 255, .9); border-color: rgba(91, 59, 255, .3); }
+  </style>
+</head>
+<body>
+  <canvas id="tela"></canvas>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <linearGradient id="grad-cartolina" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#BBA8FF"/><stop offset="1" stop-color="#5CE1FF"/></linearGradient>
+  </defs></svg>
+  <div id="cartoline"></div>
+  <div id="etichetta"></div>
+  <div id="attesa"></div>
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>

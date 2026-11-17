@@ -1,0 +1,113 @@
+{
+  "name": "fionda",
+  "version": "0.1.0",
+  "description": "Fling files between your iPhone and your computer: bring the phone close, the screen edge lights up. Local network only, no accounts.",
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "author": "FIONDA contributors",
+  "private": true,
+  "main": "./out/main/index.js",
+  "scripts": {
+    "test": "vitest run",
+    "tipi": "tsc -p .",
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "start": "electron-vite preview",
+    "pacchetto": "electron-vite build && electron-builder --publish never",
+    "pacchetto:win": "electron-vite build && electron-builder --win --publish never",
+    "pacchetto:mac": "electron-vite build && electron-builder --mac --publish never",
+    "pacchetto:linux": "electron-vite build && electron-builder --linux --publish never"
+  },
+  "dependencies": {
+    "@stoprocent/noble": "2.8.0",
+    "bonjour-service": "^1.4.4",
+    "heic-convert": "^2.1.0",
+    "koffi": "^3.3.8",
+    "qrcode": "^1.5.4",
+    "selfsigned": "^5.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/qrcode": "^1.5.6",
+    "electron": "^45.3.2",
+    "electron-builder": "^26.18.0",
+    "electron-vite": "^6.0.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0"
+  },
+  "build": {
+    "appId": "dev.fionda.app",
+    "productName": "Fionda",
+    "artifactName": "fionda-${version}-${os}-${arch}.${ext}",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "out/**",
+      "package.json"
+    ],
+    "npmRebuild": false,
+    "asarUnpack": [
+      "**/node_modules/@stoprocent/**",
+      "**/node_modules/koffi/**",
+      "**/node_modules/heic-convert/**",
+      "**/node_modules/heic-decode/**",
+      "**/node_modules/libheif-js/**",
+      "**/node_modules/jpeg-js/**",
+      "**/node_modules/pngjs/**"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "Fionda"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
+      ],
+      "category": "public.app-category.productivity",
+      "extendInfo": {
+        "LSUIElement": true,
+        "NSBluetoothAlwaysUsageDescription": "Fionda uses Bluetooth only to know when your phone is close to this computer.",
+        "NSLocalNetworkUsageDescription": "Fionda uses your home network to send files to and from your phone. Nothing leaves your home."
+      }
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Utility",
+      "maintainer": "FIONDA contributors <noreply@example.invalid>",
+      "synopsis": "Fling files between your iPhone and your computer"
+    }
+  }
+}

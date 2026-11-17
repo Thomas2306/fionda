@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'">
+  <title>Fionda — abbina il telefono</title>
+  <style>
+    :root { --sfondo: #0b0a18; --carta: #15132b; --testo: #f2efff; --tenue: #9a95c4; --viola: #7b5cff; --lavanda: #bba8ff; --bordo: #2a2650; }
+    @media (prefers-color-scheme: light) {
+      :root { --sfondo: #f6f4ff; --carta: #ffffff; --testo: #1b1240; --tenue: #6b6590; --viola: #5b3bff; --lavanda: #8e6bff; --bordo: #e3ddff; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--sfondo); color: var(--testo); font: 15px/1.45 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; padding: 26px 28px; }
+    h1 { font-size: 21px; margin: 0 0 4px; letter-spacing: .2px; }
+    .tenue { color: var(--tenue); }
+    .qr { margin: 20px auto 10px; width: 272px; height: 272px; border-radius: 22px; background: #fff; padding: 16px; position: relative;
+      box-shadow: 0 0 0 1px var(--bordo), 0 18px 60px -12px rgba(123, 92, 255, .55); transition: transform .4s ease, opacity .4s ease; }
+    .qr img { width: 100%; height: 100%; image-rendering: pixelated; display: block; }
+    .qr.fatto { transform: scale(.92); opacity: .15; }
+    #ok { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; font-size: 18px; font-weight: 700; color: var(--testo); opacity: 0; transition: opacity .4s; text-align: center; }
+    #ok .spunta { width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, #7b5cff, #5ce1ff); box-shadow: 0 10px 40px -6px rgba(92, 225, 255, .8); animation: pop .5s cubic-bezier(.2, 1.6, .4, 1) both; }
+    @keyframes pop { from { transform: scale(.3); opacity: 0; } }
+    .testa { display: flex; gap: 14px; align-items: center; }
+    .logo img { display: block; }
+    .logo { width: 46px; height: 46px; border-radius: 13px; overflow: hidden; display: grid; place-items: center; color: #fff; background: #07070f; box-shadow: 0 8px 26px -8px rgba(123, 92, 255, .9); flex: none; }
+    .due { display: grid; gap: 8px; margin-top: 18px; }
+    .modo { display: flex; gap: 12px; align-items: flex-start; padding: 11px 12px; border-radius: 14px; background: var(--carta); border: 1px solid var(--bordo); font-size: 13.5px; }
+    .modo .ic { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; color: var(--lavanda); background: rgba(123, 92, 255, .14); flex: none; }
+    .nota { display: flex; gap: 8px; align-items: center; font-size: 12.5px; color: var(--tenue); margin-top: 4px; }
+    .nota span { color: var(--lavanda); display: grid; }
+    .riga { gap: 12px; }
+    .iconaRiga { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; color: var(--lavanda); background: rgba(123, 92, 255, .14); flex: none; }
+    .qr { margin: 16px auto 8px; width: 232px; height: 232px; }
+    #ok.visto { opacity: 1; }
+    ol { padding-left: 20px; margin: 12px 0 6px; }
+    li { margin: 3px 0; }
+    .riga { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border-radius: 12px; background: var(--carta); border: 1px solid var(--bordo); margin-top: 8px; }
+    button { font: inherit; border: 0; border-radius: 10px; padding: 7px 12px; cursor: pointer; background: var(--bordo); color: var(--testo); }
+    button:hover { filter: brightness(1.15); }
+    button.primo { background: var(--viola); color: #fff; }
+    h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--tenue); margin: 22px 0 4px; }
+    .piede { display: flex; gap: 8px; margin-top: 16px; }
+    .scade { text-align: center; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="testa"><div class="logo" id="logo"></div><div><h1>Collega il telefono</h1>
+  <div class="tenue">Una volta sola: poi telefono e PC si riconoscono da soli.</div></div></div>
+  <div class="due">
+    <div class="modo"><div class="ic" data-icona="onde"></div><div><b>Avvicinandolo</b><div class="tenue">Apri Fionda sull'iPhone e avvicinalo a questo PC. Confermi qui con i simboli.</div></div></div>
+    <div class="modo"><div class="ic" data-icona="qr"></div><div><b>Col codice QR</b><div class="tenue">Fionda sull'iPhone → Usa il codice QR → inquadra.</div></div></div>
+  </div>
+  <div class="qr" id="riquadro"><img id="qr" alt="QR di abbinamento"><div id="ok"></div></div>
+  <div class="scade tenue" id="scade"></div>
+  <div class="nota"><span data-icona="scudo"></span>Telefono e PC sulla stessa rete di casa. Niente internet, niente account.</div>
+  <div class="tenue" id="indirizzi" style="font-size:13px"></div>
+  <h2>Telefoni abbinati</h2>
+  <div id="telefoni"></div>
+  <div class="piede">
+    <button class="primo" id="nuovo">Nuovo codice</button>
+    <button id="cartella">Apri i file ricevuti</button>
+  </div>
+  <script type="module" src="./abbina.ts"></script>
+</body>
+</html>

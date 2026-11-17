@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
+  <title>Fionda — collegare il telefono?</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: transparent; overflow: hidden; user-select: none; }
+    body { display: grid; place-items: center; font: 15px/1.45 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; color: #f2efff; }
+    * { box-sizing: border-box; }
+    .carta {
+      width: 360px; padding: 26px 24px 22px; border-radius: 26px; text-align: center; position: relative; overflow: hidden;
+      background: radial-gradient(120% 90% at 50% 0%, #2a1d6e 0%, #120e2c 55%, #0b0a18 100%);
+      border: 1px solid rgba(187, 168, 255, .35);
+      box-shadow: 0 0 0 1px rgba(123, 92, 255, .2), 0 26px 70px -14px rgba(123, 92, 255, .75);
+      animation: entra .5s cubic-bezier(.2, 1.4, .4, 1) both; -webkit-app-region: drag;
+    }
+    @keyframes entra { from { transform: translateY(18px) scale(.9); opacity: 0; } }
+    .alone { position: absolute; left: 50%; top: -60px; width: 240px; height: 240px; margin-left: -120px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(123, 92, 255, .55), transparent 65%); animation: respira 2.2s ease-in-out infinite; pointer-events: none; }
+    @keyframes respira { 50% { transform: scale(1.18); opacity: .6; } }
+    .coppia { display: flex; align-items: center; justify-content: center; gap: 10px; position: relative; }
+    .dispositivo { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; color: #fff;
+      background: linear-gradient(135deg, rgba(123, 92, 255, .9), rgba(58, 42, 138, .9)); box-shadow: 0 8px 26px -8px rgba(123, 92, 255, .9); }
+    .filo { display: flex; gap: 7px; }
+    .filo i { width: 6px; height: 6px; border-radius: 50%; background: #5ce1ff; opacity: .25; animation: corre 1.2s infinite; }
+    .filo i:nth-child(2) { animation-delay: .2s; } .filo i:nth-child(3) { animation-delay: .4s; }
+    @keyframes corre { 40% { opacity: 1; transform: scale(1.4); box-shadow: 0 0 10px #5ce1ff; } }
+    h1 { font-size: 19px; margin: 8px 0 2px; position: relative; }
+    .tenue { color: #a9a3d6; font-size: 13.5px; position: relative; }
+    .simboli { display: flex; justify-content: center; gap: 10px; margin: 18px 0 8px; position: relative; }
+    .simboli span { width: 62px; height: 62px; display: grid; place-items: center; border-radius: 18px;
+      background: rgba(255, 255, 255, .07); border: 1px solid rgba(187, 168, 255, .25); animation: cade .5s cubic-bezier(.2, 1.5, .4, 1) both; }
+    .simboli span:nth-child(2) { animation-delay: .08s; } .simboli span:nth-child(3) { animation-delay: .16s; } .simboli span:nth-child(4) { animation-delay: .24s; }
+    @keyframes cade { from { transform: translateY(-16px) scale(.6); opacity: 0; } }
+    .bottoni { display: flex; gap: 10px; margin-top: 18px; position: relative; -webkit-app-region: no-drag; }
+    button { flex: 1; font: 600 15px inherit; font-family: inherit; border: 0; border-radius: 14px; padding: 12px; cursor: pointer; color: #f2efff; background: rgba(255, 255, 255, .09); }
+    button.si { background: linear-gradient(135deg, #7b5cff, #5ce1ff); color: #fff; box-shadow: 0 8px 26px -8px rgba(92, 225, 255, .8); }
+    button:hover { filter: brightness(1.12); }
+    .fatto .simboli span { background: rgba(91, 227, 160, .18); border-color: rgba(91, 227, 160, .6); }
+    .fatto .bottoni { opacity: 0; transition: opacity .3s; }
+  </style>
+</head>
+<body>
+  <div class="carta" id="carta">
+    <div class="alone"></div>
+    <div class="coppia"><div class="dispositivo" id="icTelefono"></div><div class="filo"><i></i><i></i><i></i></div><div class="dispositivo" id="icPc"></div></div>
+    <h1 id="titolo">Un telefono vuole collegarsi</h1>
+    <div class="tenue" id="sotto">Controlla che sul telefono ci siano gli stessi simboli.</div>
+    <div class="simboli" id="simboli"></div>
+    <div class="bottoni">
+      <button id="no">Rifiuta</button>
+      <button id="si" class="si">Collega</button>
+    </div>
+  </div>
+  <script type="module" src="./richiesta.ts"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+name: Idea
+description: Una funzione o un miglioramento
+labels: [idea]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: L'idea
+      description: Cosa vorresti e perché ti servirebbe.
+    validations:
+      required: true

@@ -1,0 +1,9 @@
+{
+  "name": "fionda-ble",
+  "version": "0.1.0",
+  "description": "Bluetooth di Fionda: il telefono si fa sentire dal PC (e, piano B, ascolta il PC)",
+  "main": "index.ts",
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "author": "Fionda",
+  "homepage": "https://example.invalid/fionda"
+}

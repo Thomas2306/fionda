@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'">
+  <title>Fionda — senza app</title>
+  <style>
+    :root { --sfondo: #0b0a18; --carta: #15132b; --testo: #f2efff; --tenue: #9a95c4; --viola: #7b5cff; --lavanda: #bba8ff; --ciano: #5ce1ff; --bordo: #2a2650; }
+    @media (prefers-color-scheme: light) {
+      :root { --sfondo: #f6f4ff; --carta: #ffffff; --testo: #1b1240; --tenue: #6b6590; --viola: #5b3bff; --lavanda: #6b4dff; --ciano: #0e8fbf; --bordo: #e3ddff; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--sfondo); color: var(--testo); font: 14.5px/1.45 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; padding: 24px 26px; }
+    h1 { font-size: 20px; margin: 0; }
+    .tenue { color: var(--tenue); }
+    .testa { display: flex; gap: 14px; align-items: center; }
+    .logo { width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center; color: #fff; flex: none;
+      background: linear-gradient(135deg, #7b5cff, #3a2a8a); box-shadow: 0 8px 26px -8px rgba(123, 92, 255, .9); }
+    .qr { margin: 18px auto 6px; width: 220px; height: 220px; border-radius: 20px; background: #fff; padding: 14px;
+      box-shadow: 0 0 0 1px var(--bordo), 0 18px 60px -12px rgba(123, 92, 255, .55); }
+    .qr img { width: 100%; height: 100%; image-rendering: pixelated; display: block; }
+    .centro { text-align: center; font-size: 13px; }
+    h2 { font-size: 11.5px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--tenue); margin: 20px 0 8px; }
+    .zona { border: 1.5px dashed var(--bordo); border-radius: 16px; padding: 14px; text-align: center; color: var(--tenue); transition: border-color .2s, background .2s; }
+    .zona.sopra { border-color: var(--ciano); background: rgba(92, 225, 255, .07); }
+    .riga { display: flex; gap: 10px; align-items: center; padding: 8px 10px; border-radius: 12px; background: var(--carta); border: 1px solid var(--bordo); margin-top: 6px; text-align: left; color: var(--testo); }
+    .riga .ic { color: var(--lavanda); display: grid; }
+    .riga .n { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    button { font: inherit; font-size: 13px; border: 0; border-radius: 10px; padding: 7px 11px; cursor: pointer; background: var(--bordo); color: var(--testo); display: inline-flex; gap: 6px; align-items: center; }
+    button.primo { background: var(--viola); color: #fff; margin-top: 10px; }
+    button.x { background: transparent; color: var(--tenue); padding: 4px; }
+    .nota { display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--tenue); margin-top: 18px; }
+    .nota span { color: var(--lavanda); display: grid; flex: none; margin-top: 1px; }
+  </style>
+</head>
+<body>
+  <div class="testa"><div class="logo" id="logo"></div><div><h1>Senza app</h1>
+    <div class="tenue">Per un telefono che non ha Fionda.</div></div></div>
+  <div class="qr"><img id="qr" alt="QR da inquadrare con la fotocamera"></div>
+  <div class="centro tenue">Inquadra con la <b>fotocamera</b> del telefono: si apre Safari.<br><span id="scade"></span></div>
+  <h2>File da mandare al telefono</h2>
+  <div class="zona" id="zona">
+    Trascina qui i file, oppure
+    <div><button class="primo" id="scegli"></button></div>
+    <div id="elenco"></div>
+  </div>
+  <h2>Dal telefono al PC</h2>
+  <div class="tenue">Sul telefono premi <b>Scegli foto o file</b>: arrivano in Download\Fionda, con l'effetto sul bordo.</div>
+  <div class="nota"><span id="scudo"></span>Funziona solo finché questa finestra è aperta (massimo 15 minuti) e solo sulla rete di casa. L'indirizzo nel QR è segreto e cambia ogni volta.</div>
+  <script type="module" src="./senzaapp.ts"></script>
+</body>
+</html>

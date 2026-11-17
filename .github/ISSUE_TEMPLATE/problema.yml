@@ -1,0 +1,29 @@
+name: Problema
+description: Qualcosa non funziona
+labels: [problema]
+body:
+  - type: textarea
+    id: cosa
+    attributes:
+      label: Cosa succede
+      description: Cosa hai fatto, cosa ti aspettavi e cosa è successo invece.
+    validations:
+      required: true
+  - type: input
+    id: computer
+    attributes:
+      label: Computer
+      placeholder: "Windows 11, Fionda 0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: telefono
+    attributes:
+      label: Telefono
+      placeholder: "iPhone 13, iOS 18.2"
+  - type: textarea
+    id: registro
+    attributes:
+      label: Registro (facoltativo)
+      description: Avvia Fionda dal terminale (cd pc && npx electron .) e incolla le righe che iniziano con "[".
+      render: text

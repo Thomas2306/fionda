@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'">
+  <title>Fionda — cronologia</title>
+  <style>
+    :root { --sfondo: #0b0a18; --carta: #15132b; --testo: #f2efff; --tenue: #9a95c4; --viola: #7b5cff; --lavanda: #bba8ff; --ciano: #5ce1ff; --bordo: #2a2650; }
+    @media (prefers-color-scheme: light) {
+      :root { --sfondo: #f6f4ff; --carta: #ffffff; --testo: #1b1240; --tenue: #6b6590; --viola: #5b3bff; --lavanda: #6b4dff; --ciano: #0e8fbf; --bordo: #e3ddff; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--sfondo); color: var(--testo); font: 14.5px/1.4 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; }
+    header { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 12px; padding: 18px 20px 14px;
+      background: linear-gradient(var(--sfondo) 70%, transparent); }
+    header h1 { font-size: 19px; margin: 0; flex: 1; }
+    button { font: inherit; font-size: 13px; border: 0; border-radius: 10px; padding: 7px 11px; cursor: pointer; background: var(--bordo); color: var(--testo); display: inline-flex; align-items: center; gap: 6px; }
+    button:hover { filter: brightness(1.15); }
+    main { padding: 0 20px 24px; }
+    h2 { font-size: 11.5px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--tenue); margin: 18px 0 8px; }
+    .voce { display: flex; gap: 12px; align-items: center; padding: 10px 12px; border-radius: 14px; background: var(--carta); border: 1px solid var(--bordo); margin-bottom: 8px; }
+    .voce.manca { opacity: .5; }
+    .fig { width: 46px; height: 46px; border-radius: 11px; flex: none; display: grid; place-items: center; overflow: hidden;
+      background: radial-gradient(circle at 50% 35%, rgba(123, 92, 255, .35), rgba(123, 92, 255, .1)); color: var(--lavanda); }
+    .fig img { width: 100%; height: 100%; object-fit: cover; }
+    .testo { flex: 1; min-width: 0; }
+    .nome { font-weight: 650; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .info { color: var(--tenue); font-size: 12.5px; display: flex; align-items: center; gap: 5px; }
+    .info svg { flex: none; }
+    .azioni { display: flex; gap: 6px; }
+    .azioni button { padding: 7px 9px; background: transparent; color: var(--lavanda); }
+    .azioni button:hover { background: var(--bordo); }
+    .vuota { text-align: center; color: var(--tenue); margin-top: 70px; }
+    .vuota .grande { width: 76px; height: 76px; border-radius: 22px; margin: 0 auto 14px; display: grid; place-items: center; color: var(--lavanda);
+      background: radial-gradient(circle at 50% 35%, rgba(123, 92, 255, .35), rgba(123, 92, 255, .08)); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cronologia</h1>
+    <button id="cartella"></button>
+    <button id="svuota">Svuota</button>
+  </header>
+  <main id="elenco"></main>
+  <script type="module" src="./cronologia.ts"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+{
+  "expo": {
+    "name": "Fionda",
+    "slug": "fionda",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#07070f"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.thomasbreack.fionda",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSBluetoothAlwaysUsageDescription": "Fionda usa il Bluetooth solo per capire quando il telefono è vicino al tuo computer.",
+        "NSLocalNetworkUsageDescription": "Fionda usa la rete di casa per mandare i file al tuo computer e riceverli. Niente esce da casa tua.",
+        "NSBonjourServices": [
+          "_fionda._tcp"
+        ],
+        "NSAppTransportSecurity": {
+          "NSAllowsLocalNetworking": true
+        },
+        "NSPhotoLibraryAddUsageDescription": "Fionda mette nel rullino le foto e i video che mandi dal tuo PC. Può solo aggiungere: non vede le tue foto.",
+        "UIFileSharingEnabled": true,
+        "LSSupportsOpeningDocumentsInPlace": true
+      },
+      "appleTeamId": "562BDJM25U",
+      "entitlements": {
+        "com.apple.security.application-groups": [
+          "group.com.thomasbreack.fionda"
+        ]
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "scheme": "fionda",
+    "backgroundColor": "#07070f",
+    "plugins": [
+      "@bacons/apple-targets",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Fionda usa la fotocamera solo per leggere il codice QR mostrato dal tuo PC. Nessuna foto viene salvata o inviata.",
+          "microphonePermission": false,
+          "recordAudioAndroid": false
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "build": {
+          "experimental": {
+            "ios": {
+              "appExtensions": [
+                {
+                  "bundleIdentifier": "com.thomasbreack.fionda.condividi",
+                  "targetName": "condividi",
+                  "entitlements": {
+                    "com.apple.security.application-groups": [
+                      "group.com.thomasbreack.fionda"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "projectId": "e29ebf41-e324-49ec-88c9-eb1d6f71812b"
+      }
+    },
+    "owner": "thomasbreack"
+  }
+}
