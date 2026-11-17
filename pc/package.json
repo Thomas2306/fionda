@@ -4,6 +4,14 @@
   "description": "Fling files between your iPhone and your computer: bring the phone close, the screen edge lights up. Local network only, no accounts.",
   "license": "PolyForm-Noncommercial-1.0.0",
   "author": "FIONDA contributors",
+  "homepage": "https://github.com/Thomas2306/fionda",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Thomas2306/fionda.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Thomas2306/fionda/issues"
+  },
   "private": true,
   "main": "./out/main/index.js",
   "scripts": {
